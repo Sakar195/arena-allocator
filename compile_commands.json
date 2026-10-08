@@ -1,0 +1,17 @@
+[
+  {
+    "directory": "/home/sakar/Projects/c/arena",
+    "command": "clang -Iinclude -std=c23 -c src/arena.c",
+    "file": "src/arena.c"
+  },
+  {
+    "directory": "/home/sakar/Projects/c/arena",
+    "command": "clang -Iinclude -std=c23 -c tests/test_arena.c",
+    "file": "tests/test_arena.c"
+  },
+  {
+    "directory": "/home/sakar/Projects/c/arena",
+    "command": "clang -Iinclude -std=c23 -c bench/bench_arena.c",
+    "file": "bench/bench_arena.c"
+  }
+]

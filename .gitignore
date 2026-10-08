@@ -1,0 +1,6 @@
+# Build artifacts & executables
+run_tests
+run_bench
+run_basic
+# LLVM / clangd toolchain files generated locally (optional, keep compile_commands.json if you want)
+.cache/
