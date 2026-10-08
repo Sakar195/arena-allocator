@@ -24,15 +24,15 @@ General-purpose memory allocators like `malloc()` carry significant metadata ove
 ```
 
 ### The Alignment Math
-To avoid CPU alignment penalties (or hardware bus traps on architectures like ARM), allocations are aligned to powers of 2 ($a \in \{1, 2, 4, 8, 16, \dots\}$) using fast bitwise masking instead of costly integer modulo division:
+To avoid CPU alignment penalties (or hardware bus traps on architectures like ARM), allocations are aligned to powers of 2 (`a` in `1, 2, 4, 8, 16, ...`) using fast bitwise masking instead of costly integer modulo division:
 
-$$\text{aligned\_addr} = (\text{addr} + a - 1) \ \& \ \sim(a - 1)$$
+```c
+aligned_addr = (addr + a - 1) & ~(a - 1)
+```
 
-- **Masking:** Because $a$ is a power of 2, $a - 1$ produces a bitmask of all trailing bits to be cleared, and $\sim(a - 1)$ creates a mask that zeroes them out (rounding down).
-- **Rounding Up:** Adding $a - 1$ prior to masking pushes any unaligned address to or past the next alignment boundary, without advancing addresses that are already aligned.
-- **Padding:** The allocator calculates padding bytes $(\text{aligned\_addr} - \text{addr})$ and advances the cursor by $(\text{padding} + \text{size})$.
----
-
+- **Masking:** Because `a` is a power of 2, `a - 1` produces a bitmask of all trailing bits to be cleared, and `~(a - 1)` creates a mask that zeroes them out (rounding down).
+- **Rounding Up:** Adding `a - 1` prior to masking pushes any unaligned address to or past the next alignment boundary, without advancing addresses that are already aligned.
+- **Padding:** The allocator calculates padding bytes `(aligned_addr - addr)` and advances the cursor by `padding + size`.
 ## API Contract
 
 | Function | Time Complexity | Description |
