@@ -31,7 +31,6 @@ $$\text{aligned\_addr} = (\text{addr} + a - 1) \ \& \ \sim(a - 1)$$
 - **Masking:** Because $a$ is a power of 2, $a - 1$ produces a bitmask of all trailing bits to be cleared, and $\sim(a - 1)$ creates a mask that zeroes them out (rounding down).
 - **Rounding Up:** Adding $a - 1$ prior to masking pushes any unaligned address to or past the next alignment boundary, without advancing addresses that are already aligned.
 - **Padding:** The allocator calculates padding bytes $(\text{aligned\_addr} - \text{addr})$ and advances the cursor by $(\text{padding} + \text{size})$.
-
 ---
 
 ## API Contract
